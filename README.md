@@ -10,9 +10,9 @@
 
 - Scan project pages directly within your browser.
 - Generate README files in three customizable lengths:
-  - Brief
-  - Medium
-  - Detailed
+  - Roadman
+  - Medium Readme file
+  - Full Readme file
 - Preview generated README in real-time within the extension window.
 - Download the README file with a single click.
 - User-friendly and intuitive interface.
