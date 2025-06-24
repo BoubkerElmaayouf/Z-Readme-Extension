@@ -61,6 +61,31 @@ document.getElementById("summarize").addEventListener("click", async () => {
         });
     }
   });
+
+  document.getElementById("download-btn").addEventListener("click", () => {
+    let res = document.getElementById("result").innerText;
+
+    if (!res || res.trim() === "") {
+        alert("No summary available to download.");
+        return;
+    }
+
+    const blob = new Blob([res], { type: 'text/plain' });
+
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'README.md'; // You can change the filename as needed
+    
+    // Append to body, click, and remove
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Clean up the URL object
+    window.URL.revokeObjectURL(url);
+});
   
   async function getGeminiSummary(text, summaryType, apiKey) {
     // Truncate very long texts to avoid API limits (typically around 30K tokens)
@@ -71,7 +96,17 @@ document.getElementById("summarize").addEventListener("click", async () => {
     let prompt;
     switch (summaryType) {
       case "brief":
-        prompt = `Summarize the main points of the following article in 2-3 concise sentences for a README project explanation:\n\n${truncatedText}`;
+        prompt = `Generate a structured to-do list for learning a project or concept effectively, breaking the process into distinct learning tasks. Each task should include:
+
+        A clear explanation of the specific learning step or task and its significance.
+        
+        Key concepts or skills to focus on within that step.
+        
+        An estimated timeframe for completing the task to ensure balanced progress and depth of understanding.
+        
+        At least one recommended resource (such as websites, books, videos, or tutorials) that directly supports learning that specific task.
+        
+        The output should be formatted as a step-by-step list, with each task providing actionable details for focused learning:\n\n${truncatedText}`;
         break;
       case "detailed":
         prompt = `Transform the following article into a well-structured README file that includes a clear project overview, purpose, detailed summary of key points, and a section for author information. Ensure the README is comprehensive, engaging, and suitable for educational projects:\n\n${truncatedText}`;

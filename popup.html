@@ -204,13 +204,13 @@
             transform: translateY(0);
         }
 
-        #copy-btn {
+        #copy-btn, #download-btn {
             background: rgba(45, 55, 72, 0.8);
             color: #a0aec0;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        #copy-btn:hover:not(:disabled) {
+        #copy-btn:hover:not(:disabled) , #download-btn:hover:not(:disabled) {
             background: rgba(16, 185, 129, 0.2);
             border-color: #10b981;
             color: #10b981;
@@ -392,7 +392,7 @@
                     <div class="option-label">Choose Summary</div>
                         <div class="select-container">
                             <select id="summary-type">
-                                <option value="brief">Quick Snapshot</option>
+                                <option value="brief">Roadmap</option>
                                 <option value="detailed">Full Breakdown</option>
                                 <option value="bullets">Full Haha</option>
                             </select>
@@ -418,6 +418,7 @@
             <pre id="result">
 
             </pre>
+            <button id="download-btn">Download file </button>
         </div>
     </div>
 
