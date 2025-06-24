@@ -77,10 +77,6 @@ To contribute:
 **Q:** Can I collaborate on this project?
 **A:** Absolutely! Feel free to check the repo and submit pull requests.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ---
 
 **Created with ❤️ by [Boubker Elmaayouf](https://github.com/BoubkerElmaayouf)**
