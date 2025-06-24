@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Z-Readme Generator Instructions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #121622;
+      color: #d1d9e6;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 650px;
+      width: 100%;
+      background: linear-gradient(145deg, #1e2738, #16202a);
+      border-radius: 14px;
+      padding: 32px 36px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2rem;
+      color: #6db2ff;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    h2 {
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #95baff;
+      margin-top: 2.8rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #4a7be6;
+      padding-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 1.2rem;
+      font-size: 1rem;
+      color: #c4cee7;
+    }
+
+    a {
+      color: #7db9ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover {
+      color: #a9cbff;
+      text-decoration: underline;
+    }
+
+    ol.numbered-list {
+      padding-left: 1.3rem;
+      margin: 0 0 1.5rem 0;
+      counter-reset: section;
+      list-style: none;
+    }
+
+    ol.numbered-list > li {
+      counter-increment: section;
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+    ol.numbered-list > li::before {
+      content: counter(section);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #5a8dff;
+      color: white;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(35, 56, 95, 0.7);
+      user-select: none;
+    }
+
+    ul {
+      padding-left: 0;
+      margin: 0.5rem 0 1.5rem 0;
+      list-style-type: none;
+    }
+    ul li {
+      background: #22304a;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: #aac8ff;
+      line-height: 1.3;
+    }
+    ul li strong {
+      color: #d0e1ff;
+    }
+
+    .form-group {
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #c1d4ff;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1.5px solid #4269d3;
+      background-color: #2b3959;
+      color: #d7e1ff;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      outline-offset: 2px;
+      outline-color: transparent;
+    }
+    input[type="text"]::placeholder {
+      color: #8c9ecf;
+    }
+    input[type="text"]:focus {
+      border-color: #85aaff;
+      outline-color: #85aaff;
+      box-shadow: 0 0 6px 2px rgba(133, 170, 255, 0.7);
+    }
+
+    button#save-button {
+      background: #3e65e8;
+      color: #f0f7ff;
+      padding: 14px 28px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 5px 15px rgba(62, 101, 232, 0.6);
+      transition: background-color 0.3s ease, transform 0.15s ease;
+      user-select: none;
+    }
+    button#save-button:hover {
+      background: #5d7de3;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(93, 125, 227, 0.8);
+    }
+    button#save-button:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(62, 101, 232, 0.5);
+    }
+
+    .success-message {
+      background: #2d5a27;
+      border-radius: 8px;
+      color: #b7f2a4;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 25px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(45, 90, 39, 0.6);
+      display: none;
+      user-select: none;
+    }
+
+    .important-note {
+      background: #3b2e20;
+      border-left: 5px solid #a77e3a;
+      padding: 18px 22px;
+      margin-top: 32px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      color: #d8b76f;
+      line-height: 1.4;
+      user-select: none;
+    }
+    .important-note strong {
+      color: #f0d786;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 20px 15px;
+      }
+      .container {
+        padding: 24px 28px;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+        margin-top: 2rem;
+      }
+      input[type="text"] {
+        padding: 10px 12px;
+      }
+      button#save-button {
+        padding: 12px 22px;
+        font-size: 1rem;
+      }
+      ol.numbered-list > li {
+        font-size: 0.95rem;
+        padding-left: 30px;
+      }
+      ol.numbered-list > li::before {
+        width: 22px;
+        height: 22px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>How to use: Z-Readme Generator</h1>
+
+    <p>Thank you warmly for downloading the Z-Readme Generator extension! We're excited for you to streamline your project documentation.</p>
+
+    <h2>Getting Started</h2>
+    <ol class="numbered-list">
+      <li>
+        To begin, you'll need a <strong>Gemini API key</strong>. You can easily obtain one from:
+        <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a>.
+      </li>
+      <li>
+        Once you have your API key, paste it into the input field below and click the "Save" button.
+      </li>
+    </ol>
+
+    <div class="form-group">
+      <label for="api-key">Gemini API Key:</label>
+      <input type="text" id="api-key" placeholder="Enter your Gemini API key" autocomplete="off" />
+    </div>
+
+    <button id="save-button">Save Settings</button>
+
+    <p id="success-message" class="success-message">
+      You are good to go! Your settings have been saved. Thank you for using Z-Readme Generator.
+    </p>
+
+    <h2>How Z-Readme Works</h2>
+    <ol class="numbered-list">
+      <li>
+        Navigate to your project graph on the Zone01 intra:
+        <a href="https://learn.zone01oujda.ma/intra/oujda/profile" target="_blank" rel="noopener noreferrer">https://learn.zone01oujda.ma/intra/oujda/profile</a>.
+        From there, <strong>select any project</strong> you wish to summarize.
+      </li>
+      <li>
+        Next, choose your desired <strong>summary type</strong> from the dropdown menu within the extension:
+        <ul>
+          <li><strong>Quick Snapshot:</strong> Provides a brief overview of your project.</li>
+          <li><strong>Full Breakdown:</strong> Generates detailed information about your project.</li>
+          <li><strong>Full Haha:</strong> Creates a complete README file (<em>recommended for comprehensive documentation</em>).</li>
+        </ul>
+      </li>
+      <li>
+        Finally, click the <strong>"Create README"</strong> button to generate the summary based on your selection.
+      </li>
+      <li>
+        The generated README will appear in the <strong>"Output" section</strong> of the extension. You can then easily copy the entire README content by clicking the <strong>"Copy"</strong> button.
+      </li>
+    </ol>
+
+    <div class="important-note">
+        <strong>Important:</strong>Dear student, This is just a demo version of the extension. If you want to collaborate, here is the <a href="https://github.com/your-repo-link" target="_blank" rel="noopener noreferrer">repo</a>.  
+        This is not an excuse to avoid making your own README documentation — I encourage you to do so yourself!  
+        Note that this page serves as a guide for using the Z-Readme extension and is not the extension itself. The functionality described (like dropdowns and output sections) refers to features within the extension you downloaded.
+      </div>      
+  </div>
+</body>
+</html>
